@@ -8,4 +8,7 @@ var receiverSchema = mongoose.Schema({
 	supportedTypes: String // Array of the ObjectIds of all supported types
 });
 
-module.exports = mongoose.model('Receiver', receiverSchema);
+module.exports = {
+	schema: receiverSchema,
+	model: mongoose.model('Receiver', receiverSchema)
+}
