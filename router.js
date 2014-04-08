@@ -1,8 +1,11 @@
 var passport = require('passport');
 var async = require('async');
 
+var handleError = require('./modules/handleError').response;
+
 var Account = require('./models/Account').model;
 var Org = require('./models/Org').model;
+var Receiver = require('./models/Receiver').model;
 
 var registerAccount = require('./routes/account/register');
 var loginAccount = require('./routes/account/login');
@@ -10,6 +13,8 @@ var loginAccount = require('./routes/account/login');
 var newOrg = require('./routes/org/new');
 var listOrg = require('./routes/org/list');
 var deleteOrg = require('./routes/org/delete');
+
+var newReceiver = require('./routes/receivers/new');
 
 
 module.exports = function (app) {
@@ -22,10 +27,12 @@ module.exports = function (app) {
 	// Needs POST with username and password in the body
 	app.post('/login', passport.authenticate('local'), loginAccount);
 
+
 	// To go beyond this point, you need to be authenticated by passport-bearer
 	// We need to send this header :
 	// Authorization : bearer ***token***
 	//app.get('*', passport.authenticate('bearer', { session: false }));
+
 
 	// Create a new organization
 	// Needs POST with name in the body
@@ -38,5 +45,10 @@ module.exports = function (app) {
 	// Delete an organization if you're an admin
 	// Needs POST with deleteId in the body
 	app.post('/orgs/delete', passport.authenticate('bearer', { session: false }), deleteOrg);
+
+
+	// Create a new receiver in an organization
+	// Needs POST with name of new receiver, parentOrg id
+	app.post('/receivers/new', passport.authenticate('bearer', { session: false }), newReceiver);
 
 }
