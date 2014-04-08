@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var receiverSchema = mongoose.Schema({
 	name: String,
+	active: Boolean,
 	owner: {type: Schema.Types.ObjectId, ref: 'Org'},
 	description: String,
 	created: Date,

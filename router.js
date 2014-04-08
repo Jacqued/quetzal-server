@@ -15,6 +15,7 @@ var listOrg = require('./routes/org/list');
 var deleteOrg = require('./routes/org/delete');
 
 var newReceiver = require('./routes/receivers/new');
+var listReceiver = require('./routes/receivers/list');
 
 
 module.exports = function (app) {
@@ -50,5 +51,9 @@ module.exports = function (app) {
 	// Create a new receiver in an organization
 	// Needs POST with name of new receiver, parentOrg id
 	app.post('/receivers/new', passport.authenticate('bearer', { session: false }), newReceiver);
+
+	// Lists all the receivers you have access to through your organizations
+	// Needs nothing
+	app.get('/receivers', passport.authenticate('bearer', { session: false }), listReceiver);
 
 }
