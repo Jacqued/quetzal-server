@@ -1,3 +1,4 @@
+var handleError = require('../../modules/handleError').response;
 var Org = require('../../models/Org.js').model;
 
 module.exports = function (req, res) {
@@ -9,15 +10,9 @@ module.exports = function (req, res) {
 		name: req.body.name,
 		admins: [req.user._id]
 	}, function (err, instance) {
-		if (err) {
-			res.send(500, 'Unable to create new organization : ' + err);
-			return;
-		}
+		if (err) return handleError(res, err, 5);
 		req.user.addOrg(instance._id, function (err, org, user) {
-			if (err) {
-				res.send(500, 'Unable to attribute organization : ' + err);
-				return;
-			}
+			if (err) return handleError(res, err, 6);
 			res.send(201, 'Organization successfully created');
 		});
 	});
