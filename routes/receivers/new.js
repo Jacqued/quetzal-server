@@ -23,9 +23,10 @@ module.exports = function (req, res) {
 				res.send(401, 'You are not an admin of selected organization.');
 				return;
 			}
-			// Finally create the 
+			// Finally create the actual receiver and save it to database
 			Receiver.create({
 				name: req.body.name,
+				active: true,
 				owner: req.body.parentOrg
 			}, function (err, instance) {
 				if (err) return handleError(res, err, 3);
