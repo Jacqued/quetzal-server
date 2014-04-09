@@ -16,16 +16,16 @@ var deleteOrg = require('./routes/org/delete');
 
 var newReceiver = require('./routes/receivers/new');
 var listReceiver = require('./routes/receivers/list');
+var deleteReceiver = require('./routes/receivers/delete');
 
 
 module.exports = function (app) {
 
 	// Route to register a new user, using passport-local-mongoose builtin
-	// Needs POST with username and password in the body
 	app.post('/register', registerAccount);
 
 	// Route to log in and get a token, authenticated by passport-local
-	// Needs POST with username and password in the body
+	// Issues token used for authentication by passport-bearer afterwards
 	app.post('/login', passport.authenticate('local'), loginAccount);
 
 
@@ -34,26 +34,12 @@ module.exports = function (app) {
 	// Authorization : bearer ***token***
 	//app.get('*', passport.authenticate('bearer', { session: false }));
 
-
-	// Create a new organization
-	// Needs POST with name in the body
 	app.post('/orgs/new', passport.authenticate('bearer', { session: false }), newOrg);
-
-	// List all organizations you are admin or member of
-	// Needs nothing
 	app.get('/orgs', passport.authenticate('bearer', { session: false }), listOrg);
-
-	// Delete an organization if you're an admin
-	// Needs POST with deleteId in the body
 	app.post('/orgs/delete', passport.authenticate('bearer', { session: false }), deleteOrg);
 
-
-	// Create a new receiver in an organization
-	// Needs POST with name of new receiver, parentOrg id
 	app.post('/receivers/new', passport.authenticate('bearer', { session: false }), newReceiver);
-
-	// Lists all the receivers you have access to through your organizations
-	// Needs nothing
 	app.get('/receivers', passport.authenticate('bearer', { session: false }), listReceiver);
+	app.post('/receivers/delete', passport.authenticate('bearer', { session: false }), deleteReceiver);
 
 }

@@ -88,3 +88,14 @@ List all receivers user has access to
   * **200** : success
     * Array of receiver objects
   * **500** : error
+
+Delete a given receiver
+
+* /receivers/delete
+* POST
+* `deleteId` : _id of receiver to delete
+* Returns
+  * **200** : success
+  * **401** : not admin of owner org
+  * **404** : no receiver with this _id
+  * **500** : error
