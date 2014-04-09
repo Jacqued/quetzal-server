@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 var messageSchema = Schema({
 	emitter: {type: Schema.Types.ObjectId, ref: 'Account'}, 
 	receiver: {type: Schema.Types.ObjectId, ref: 'Receiver'},
-	date: Date,
+	date: { type: Date, default: Date.now },
 	content: String,
 	Type: String // This should be an type ObjectId
 });

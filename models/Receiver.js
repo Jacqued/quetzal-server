@@ -6,7 +6,7 @@ var receiverSchema = mongoose.Schema({
 	active: Boolean,
 	owner: {type: Schema.Types.ObjectId, ref: 'Org'},
 	description: String,
-	created: Date,
+	created: { type: Date, default: Date.now },
 	supportedTypes: String // Array of the ObjectIds of all supported types
 });
 
