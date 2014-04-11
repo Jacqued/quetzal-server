@@ -1,32 +1,37 @@
-// Require external deps
-var express = require('express');
-var mongoose = require('mongoose');
-var http = require('http')
+var mongoose = require('mongoose'); // Handling all DB related stuff
+var express = require('express'); // Express and all its middleware
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
+var cookieParser = require('cookie-parser');
+var methodOverride = require('method-override');
+var session = require('express-session');
+var errorHandler = require('errorhandler');
 var path = require('path');
-var passport = require('passport');
+var passport = require('passport'); // Auth module and its deps
 var LocalStrategy = require('passport-local').Strategy;
 var BearerStrategy = require('passport-http-bearer').Strategy;
 
 // Main express config
 var app = express();
 app.set('port', process.env.PORT || 3000);
-app.use(express.logger());
-app.use(express.bodyParser());
-app.use(express.methodOverride());
-app.use(express.cookieParser('webinfluences2013'));
-app.use(express.session());
+app.use(morgan('dev')); // Logs reqs to console
+app.use(bodyParser()); // Parses reqs and populates req.body
+app.use(methodOverride()); // Allows PUT and DELETE in _method POST, to use app.put & app.delete
+app.use(cookieParser('webinfluences2013'));
+app.use(session());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.configure('development', function(){
-	app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
 
-app.configure('production', function(){
-	app.use(express.errorHandler());
-});
+var env = process.env.NODE_ENV || 'development';
+if ('development' == env) {
+    app.use(errorHandler({ dumpExceptions: true, showStack: true }));
+}
+if ('production' == env) {
+    app.use(errorHandler());
+}
+
 
 // passport config
 var Account = require('./models/Account').model;
