@@ -14,15 +14,14 @@ var BearerStrategy = require('passport-http-bearer').Strategy;
 // Main express config
 var app = express();
 app.set('port', process.env.PORT || 3000);
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('dev')); // Logs reqs to console
-app.use(bodyParser()); // Parses reqs and populates req.body
 app.use(methodOverride()); // Allows PUT and DELETE in _method POST, to use app.put & app.delete
+app.use(bodyParser()); // Parses reqs and populates req.body
 app.use(cookieParser('webinfluences2013'));
 app.use(session());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(path.join(__dirname, 'public')));
-
 
 var env = process.env.NODE_ENV || 'development';
 if ('development' == env) {

@@ -35,11 +35,12 @@ Any request to one of the subsequent routes **MUST** contain this header. Withou
 
 Create new org
 
-* /orgs/new
-* POST
+* /orgs
+* PUT
 * `name` : name of the org to create
 * Returns
   * **201** : success
+  	* Newly created org object
   * **400** : lacks name argument
   * **401** : unauthorized token
   * **500** : error
@@ -53,15 +54,26 @@ List all orgs user has access to
     * Array of orgs objects
   * **204** : user has no orgs
   * **500** : error
-  
-Delete a given org
 
-* /orgs/delete
-* POST
-* `deleteId` : _id of org to delete
+Gel all info on an org
+
+* /orgs/:id
+* GET
 * Returns
   * **200** : success
-  * **401** : not admin of org
+  	* Org object with populated fields
+  * **401** : Unauthorized
+  * **404** : no org with this _id
+  * **500** : error
+
+Delete a given org
+
+* /orgs/:id
+* DELETE
+* __Requires admin status__
+* Returns
+  * **200** : success
+  * **401** : Unauthorized
   * **404** : no org with this _id
   * **500** : error
 
