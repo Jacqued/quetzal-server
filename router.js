@@ -1,12 +1,10 @@
 var passport = require('passport');
 
+// All models need to be initialized before router actually is loaded
+var Message = require('./models/Message').model;
 var Account = require('./models/Account').model;
 var Org = require('./models/Org').model;
 var Receiver = require('./models/Receiver').model;
-
-var newReceiver = require('./routes/receivers/new');
-var listReceiver = require('./routes/receivers/list');
-var deleteReceiver = require('./routes/receivers/delete');
 
 
 module.exports = function (app) {
@@ -25,8 +23,6 @@ module.exports = function (app) {
 
 	app.use('/orgs', require('./routes/org'));
 
-	app.post('/receivers/new', passport.authenticate('bearer', { session: false }), newReceiver);
-	app.get('/receivers', passport.authenticate('bearer', { session: false }), listReceiver);
-	app.post('/receivers/delete', passport.authenticate('bearer', { session: false }), deleteReceiver);
-
+	app.use('/receivers', require('./routes/receivers'));
+	
 }

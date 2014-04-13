@@ -82,14 +82,15 @@ Delete a given org
 
 Create new receiver
 
-* /receivers/new
-* POST
+* /receivers
+* PUT
 * `name` : name of receiver to create
 * `parentOrg` : org under which to create it
 * Returns
   * **200** : success
+  	* Newly created receiver object
   * **400** : no name or parent org doesn't exist
-  * **401** : user lacks admin rights on org
+  * **401** : user lacks admin rights on org, or orgs doesn't exist
   * **500** : error
 
 List all receivers user has access to

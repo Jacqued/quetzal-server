@@ -31,7 +31,6 @@ if ('production' == env) {
     app.use(errorHandler());
 }
 
-
 // passport config
 var Account = require('./models/Account').model;
 passport.use(Account.createStrategy());

@@ -1,5 +1,5 @@
-var mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 var messageSchema = Schema({
 	emitter: {type: Schema.Types.ObjectId, ref: 'Account'}, 
@@ -9,4 +9,7 @@ var messageSchema = Schema({
 	Type: String // This should be an type ObjectId
 });
 
-module.exports = mongoose.model('Message', messageSchema);
+module.exports = {
+	schema: messageSchema,
+	model: mongoose.model('Message', messageSchema)
+}

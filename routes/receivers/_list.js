@@ -9,6 +9,6 @@ module.exports = function (req, res) {
 	   })
 	   .exec(function (err, docs) {
 	   		if (err) return handleError(res, err, 11);
-	   		res.json(200, docs[0].receivers);
+	   		res.json(200, docs);
 	   })
 }
