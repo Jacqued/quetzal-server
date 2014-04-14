@@ -48,6 +48,7 @@ router.use(function (req, res, next) {
 })
 
 router.route('/:receiver')
+	.post(require('./receivers/update'))
 	.delete(require('./receivers/delete'))
 
 module.exports = router;

@@ -1,5 +1,5 @@
 var handleError = require('../../modules/handleError').response;
-var Org = require('../../models/Org').model;
+var Receiver = require('../../models/Receiver').model;
 
 module.exports = function (req, res, next) {
 	// Address absence of changes
@@ -10,10 +10,10 @@ module.exports = function (req, res, next) {
 	// Assign new values to keys
 	for (key in req.body) {
 		if (key !== '_id') {
-			req.org[key] = req.body[key];
+			req.receiver[key] = req.body[key];
 		}
 	}
-	req.org.save(function (err, docs) {
+	req.receiver.save(function (err, docs) {
 		if (err) return handleError(res, err, 23); // Probably tried to add a nonexistent property
 		res.send(200, docs);
 		return;

@@ -61,12 +61,27 @@ Gel all info on an org
 
 * /orgs/:id
 * GET
+* __Requires member status__
 * Returns
   * **200** : success
   	* Org object with populated fields
   * **401** : Unauthorized
   * **404** : no org with this _id
   * **500** : error
+  
+Update a given org
+
+* /orgs/:id
+* POST
+* `JSON Object with same keys as what API returns. _id cannot be changed this way`
+* __Requires admin status__
+* Returns
+    * **200** : success
+      * Updated org object
+    * **204** : Missing post data
+    * **401** : Unauthorized
+    * **404** : no org with this _id
+    * **500** : error
 
 Delete a given org
 
@@ -108,6 +123,7 @@ Gel all info on an org
 
 * /orgs/:id
 * GET
+* __Requires member status__
 * Returns
   * **200** : success
   	* Receiver object with populated fields
@@ -115,11 +131,25 @@ Gel all info on an org
   * **404** : no receiver with this _id
   * **500** : error
 
+Update a given receiver
+
+* /receivers/:id
+* POST
+* `JSON Object with same keys as what API returns. _id cannot be changed this way`
+* __Requires admin status__
+* Returns
+    * **200** : success
+      * Updated receiver object
+    * **204** : Missing post data
+    * **401** : Unauthorized
+    * **404** : no receiver with this _id
+    * **500** : error
+
 Delete a given receiver
 
 * /receivers/:id
 * DELETE
-* `deleteId` : _id of receiver to delete
+* __Requires admin status__
 * Returns
   * **200** : success
   * **401** : Unauthorized
