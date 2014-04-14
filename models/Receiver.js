@@ -7,6 +7,7 @@ var receiverSchema = mongoose.Schema({
 	owner: { type: Schema.Types.ObjectId, ref: 'Org' },
 	description: String,
 	created: { type: Date, default: Date.now },
+	lastupdate: { type: Date, default: Date.now },
 	messages: [{ type: Schema.Types.ObjectId, ref: 'Message' }]
 });
 

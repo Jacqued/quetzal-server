@@ -48,6 +48,7 @@ router.use(function (req, res, next) {
 })
 
 router.route('/:org')
+	.post(require('./org/update'))
 	.delete(require('./org/delete'));
 
 

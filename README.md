@@ -24,11 +24,13 @@ Login
       * String : token to use with all further reqs
   * **401** : wrong credentials
   
-#### Important ! All other routes
+#### Important ! HEADERS !
 
 Any request to one of the subsequent routes **MUST** contain this header. Without it, you will be returned `401 Unauthorized` to each and every request.
 
-`Authorization` `bearer **token**` : the token that was issued at login.
+`Authorization` `bearer **token**` : the token that was issued at login  
+`Content-Type` `application/json` for all routes that make use of POST/PUT data
+
 
 ### Orgs related routes
 ---
