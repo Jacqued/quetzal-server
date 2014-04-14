@@ -9,7 +9,9 @@ module.exports = function (req, res, next) { // Create a new organization
 	}
 	Org.create({
 		name: req.body.name,
-		admins: [req.user._id]
+		admins: [req.user._id],
+		created: new Date(),
+		lastupdate: new Date()
 	}, function (err, instance) {
 		if (err) return handleError(res, err, 5);
 		// Add organization to user

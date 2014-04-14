@@ -20,10 +20,12 @@ module.exports = function (req, res) {
 		Receiver.create({
 			name: req.body.name,
 			active: true,
-			owner: req.body.parentOrg
+			owner: req.body.parentOrg,
+			created: new Date(),
+			lastupdate: new Date()
 		}, function (err, instance) {
 			if (err) return handleError(res, err, 3);
-			docs.receivers.push(instance)
+			docs.receivers.push(instance._id)
 			docs.save(function (err) {
 				if (err) return handleError(res, err, 4);
 				res.send(200, instance);

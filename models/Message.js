@@ -1,13 +1,15 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var Field = require('./Field').schema;
+
 var messageSchema = Schema({
 	emitter: {type: Schema.Types.ObjectId, ref: 'Account'}, 
 	receiver: {type: Schema.Types.ObjectId, ref: 'Receiver'},
-	date: { type: Date, default: Date.now },
+	created: { type: Date, default: Date.now },
 	lastupdate: { type: Date, default: Date.now },
 	content: String,
-	Type: String // This should be an type ObjectId
+	fields: [Field]
 });
 
 module.exports = {

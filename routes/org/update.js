@@ -9,10 +9,11 @@ module.exports = function (req, res, next) {
 	}
 	// Assign new values to keys
 	for (key in req.body) {
-		if (key !== '_id') {
+		if (key !== '_id' && key !== created && key !== lastupdate && key !== receivers) {
 			req.org[key] = req.body[key];
 		}
 	}
+	req.org.lastupdate = new Date();
 	req.org.save(function (err, docs) {
 		if (err) return handleError(res, err, 23); // Probably tried to add a nonexistent property
 		res.send(200, docs);

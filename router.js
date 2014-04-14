@@ -21,8 +21,10 @@ module.exports = function (app) {
 	// Authorization : bearer ***token***
 	app.use(passport.authenticate('bearer', { session: false }));
 
-	app.use('/orgs', require('./routes/org'));
+	app.use('/orgs', require('./routes/orgs'));
 
 	app.use('/receivers', require('./routes/receivers'));
-	
+
+	app.use('/messages', require('./routes/messages'));
+
 }

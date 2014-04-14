@@ -1,13 +1,14 @@
 var express = require('express');
 var handleError = require('../modules/handleError').response;
-var Receiver = require('../models/Receiver.js').model;
+var Message = require('../models/Message.js').model;
 
 var router = express.Router();
 
-router.route('/')
-	.get(require('./receivers/_list'))
-	.put(require('./receivers/create'))
+// Create route is in receiver as that URI seemed more expressive
 
+router.route('/')
+//	.get(require('./messages/_list'))
+/*
 // If :receiver param is present, set req.org to the right organization
 router.param('receiver', function (req, res, next, id) {
 	Receiver.findById(id)
@@ -37,7 +38,6 @@ router.use('/:receiver', function (req, res, next) {
 
 router.route('/:receiver')
 	.get(require('./receivers/get'))
-	.put(require('./messages/create')) // This is here for expressiveness of URI
 
 // Admin Authorization
 router.use(function (req, res, next) {
@@ -51,5 +51,6 @@ router.use(function (req, res, next) {
 router.route('/:receiver')
 	.post(require('./receivers/update'))
 	.delete(require('./receivers/delete'))
+	*/
 
 module.exports = router;

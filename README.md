@@ -119,9 +119,9 @@ List all receivers user has access to
     * Array of receiver objects
   * **500** : error
   
-Gel all info on an org
+Gel all info on a receiver
 
-* /orgs/:id
+* /receivers/:id
 * GET
 * __Requires member status__
 * Returns
@@ -154,4 +154,27 @@ Delete a given receiver
   * **200** : success
   * **401** : Unauthorized
   * **404** : no receiver with this _id
+  * **500** : error
+  
+### Messages related routes
+---
+
+Create new Message
+
+* /receivers/:id
+* _Placed under this URL scheme for expressiveness_
+* PUT
+* __Requires member status__
+* JSON Object with fields
+	* `content` : String, text message
+	* `fields` : Optional array of objects for special fields, each containing the following :
+		* `masterkey` : lowercase string, codename of the field used for templating and scripts. If this is not a lowercase string, write will not succeed.
+		* `name` : Human readable name of the field
+		* `content` : String, Array, Object. The semantic content of the field that is to be used for special templating and scripts.
+* Returns
+  * **200** : success
+  	* Newly created message object
+  * **204** : no content or malformed JSON
+  * **400** : `masterkey` is not a lowercase string
+  * **401** : Unauthorized
   * **500** : error
