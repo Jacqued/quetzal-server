@@ -9,7 +9,9 @@ var messageSchema = Schema({
 	created: { type: Date, default: Date.now },
 	lastupdate: { type: Date, default: Date.now },
 	content: String,
-	fields: [Field]
+	fields: [Field],
+	status: String 	// 'active' if there is a field currently active
+					// 'published if there is no active field but message is still open'
 });
 
 module.exports = {
