@@ -35,8 +35,10 @@ router.use('/:org', function (req, res, next) {
 })
 
 router.route('/:org')
-	.get(require('./org/get'));
+	.get(require('./org/get'))
 
+router.route('/:org/messages')
+	.get(require('./messages/_list')) 	// This route is here for API consistency
 
 // Admin Authorization
 router.use(function (req, res, next) {

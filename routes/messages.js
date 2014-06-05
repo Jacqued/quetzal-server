@@ -7,7 +7,7 @@ var router = express.Router();
 // Create route is in receiver as that URI seemed more expressive
 
 router.route('/')
-//	.get(require('./messages/_list'))
+	.get(require('./messages/_list'))	// Route to list any and all messages the user could see
 /*
 // If :receiver param is present, set req.org to the right organization
 router.param('receiver', function (req, res, next, id) {

@@ -57,7 +57,7 @@ List all orgs user has access to
   * **204** : user has no orgs
   * **500** : error
 
-Gel all info on an org
+Get all info on an org
 
 * /orgs/:id
 * GET
@@ -65,6 +65,20 @@ Gel all info on an org
 * Returns
   * **200** : success
   	* Org object with populated fields
+  * **401** : Unauthorized
+  * **404** : no org with this _id
+  * **500** : error
+  
+Get an org's messages
+
+* /orgs/:id/messages
+* GET
+* Optional argument : `pagination` might be a number that paginates responses by 20. If it is not supplied, assumed to be 1.
+* __Requires member status__
+* Returns
+  * **200** : success
+  	* Paginated array of messages
+  * **204** : req doesn't match any message
   * **401** : Unauthorized
   * **404** : no org with this _id
   * **500** : error
@@ -130,6 +144,20 @@ Gel all info on a receiver
   * **401** : Unauthorized
   * **404** : no receiver with this _id
   * **500** : error
+  
+Get a receiver's messages
+
+* /receivers/:id/messages
+* GET
+* Optional argument : `pagination` might be a number that paginates responses by 20. If it is not supplied, assumed to be 1.
+* __Requires member status__
+* Returns
+  * **200** : success
+  	* Paginated array of messages
+  * **204** : req doesn't match any message
+  * **401** : Unauthorized
+  * **404** : no receiver with this _id
+  * **500** : error
 
 Update a given receiver
 
@@ -176,5 +204,18 @@ Create new Message
   	* Newly created message object
   * **204** : no content or malformed JSON
   * **400** : `masterkey` is not a lowercase string
+  * **401** : Unauthorized
+  * **500** : error
+  
+List all messages a user has access to
+
+* /messages
+* GET
+* Optional argument : `pagination` might be a number that paginates responses by 20. If it is not supplied, assumed to be 1.
+* __Requires member status__
+* Returns
+  * **200** : success
+  	* Paginated array of messages
+  * **204** : user can't access any message
   * **401** : Unauthorized
   * **500** : error

@@ -37,7 +37,10 @@ router.use('/:receiver', function (req, res, next) {
 
 router.route('/:receiver')
 	.get(require('./receivers/get'))
-	.put(require('./messages/create')) // This is here for expressiveness of URI
+	.put(require('./messages/create')) 	// This route is here for expressiveness of pathname
+
+router.route('/:receiver/messages')
+	.get(require('./messages/_list')) 	// This route is here for API consistency
 
 // Admin Authorization
 router.use(function (req, res, next) {
