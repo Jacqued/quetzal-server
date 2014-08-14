@@ -1,3 +1,7 @@
+This is early work on a CRM/business monitoring webapp. For now all it does it simple CRUD on a mongoDB.
+
+Below are the routes that are already implemented. **Login is not secure yet, and error handling is messy at best for now.**
+
 # Quetzal Server API docs
 
 ### User related routes
