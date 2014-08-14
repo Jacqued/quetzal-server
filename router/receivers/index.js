@@ -1,14 +1,13 @@
 var express = require('express');
-var handleError = require('../modules/handleError').response;
-var Message = require('../models/Message.js').model;
+var handleError = require('../../modules/handleError').response;
+var Receiver = require('../../models/Receiver.js').model;
 
 var router = express.Router();
 
-// Create route is in receiver as that URI seemed more expressive
-
 router.route('/')
-	.get(require('./messages/_list'))	// Route to list any and all messages the user could see
-/*
+	.get(require('./_list'))
+	.put(require('./_create'))
+
 // If :receiver param is present, set req.org to the right organization
 router.param('receiver', function (req, res, next, id) {
 	Receiver.findById(id)
@@ -37,7 +36,11 @@ router.use('/:receiver', function (req, res, next) {
 })
 
 router.route('/:receiver')
-	.get(require('./receivers/get'))
+	.get(require('./get'))
+	.put(require('../messages/_create')) 	// This route is here for expressiveness of pathname
+
+router.route('/:receiver/messages')
+	.get(require('../messages/_list')) 	// This route is here for API consistency
 
 // Admin Authorization
 router.use(function (req, res, next) {
@@ -49,8 +52,7 @@ router.use(function (req, res, next) {
 })
 
 router.route('/:receiver')
-	.post(require('./receivers/update'))
-	.delete(require('./receivers/delete'))
-	*/
+	.post(require('./_update'))
+	.delete(require('./_delete'))
 
 module.exports = router;
